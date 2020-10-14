@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="en">
+  <head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+<link rel="stylesheet" href="style.css">
+<link href="https://fonts.googleapis.com/css2?family=Lobster+Two:ital,wght@1,700&family=Sansita+Swashed&family=Staatliches&family=Varela+Round&display=swap" rel="stylesheet">
+
+	<title>Moviefy</title>
+  </head>
+  <body>
+
+	<nav class="navbar navbar-expand-md dark">
+    <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
+       
+    </div>
+    <div class="mx-auto order-0">
+        <a class="navbar-brand mx-auto  text text-center" href="#">Moviefy</a>
+        <br>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </div>
+    <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="#">About me</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+		<div class="container-fluid dark">
+		
+			<div class="row mt-3 justify-content-center">
+				<div class="col-md-8">
+				
+		  <h1 class="text-center">Search movie</h1>
+		  <div class="input-group mb-3">
+			<input type="text" class="form-control" placeholder="Tell me the name of your awesome movie...." id="search-input">
+			<div class="input-group-append">
+			  <button class="btn btn-outline-info btn-dark" type="button" id="search-button">Search</button>
+			</div>
+		  </div>
+				</div>
+			</div>
+
+	  <hr>
+
+			<div class="row" id="movie-list">
+
+			</div>
+
+		</div>
+		
+		<br>
+			<br>
+				<br>
+					<br>
+					
+
+	<footer class="text-dark bg-dark fixed-bottom">
+	  <div class="container">
+		<div class="row pt-3">
+		  <div class="col text-center">
+			<p class="text-light">Made with ❤️ by Suraj </p>
+		  </div>
+		</div>
+	  </div>
+	</footer>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+	<div class="modal-content dark">
+	  <div class="modal-header">
+		<h3 class="modal-title dark" id="exampleModalLabel"></h3>
+		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		  <span aria-hidden="true">&times;</span>
+		</button>
+	  </div>
+	  <div class="modal-body dark">
+		...
+	  </div>
+	  <div class="modal-footer">
+		<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+	  </div>
+	</div>
+  </div>
+</div>
+
+	<!-- Optional JavaScript -->
+	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+	<script src="https://code.jquery.com/jquery-3.4.1.js"
+	integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+	crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+	<script>
+		function searchMovie() {
+	$('#movie-list').html('')
+	$.ajax({
+		url: 'https://omdbapi.com',
+		type: 'get',
+		dataType: 'json',
+		data: {
+			'apikey': '166b57cd',
+			's': $('#search-input').val()
+		},
+		success: function (result) {
+			if (result.Response == "True") {
+				let movies = result.Search
+
+				$.each(movies, function (i, data) {
+					$('#movie-list').append(`
+					<div class="col-md-4">
+						<div class="card mb-3">
+							<img src="`+ data.Poster + `" class="card-img-top img-fluid" alt="poster of ` + data.Title + `">
+							<div class="card-body">
+								<h5 class="card-title ">`+ data.Title + `<span class="text-muted">&nbsp;(` + data.Year + `)</span></h5>
+								<a href="#" class="card-link see-detail" data-toggle="modal" data-target="#exampleModal" data-id="`+ data.imdbID +`">See detail</a>
+							</div>
+						</div>
+					</div>
+					`)
+				})
+
+				$('#search-input').val('')
+
+			} else {
+				$('#movie-list').html(`
+				<div class="col">
+					<h1 class="text-center">`+ result.Error + `</h1>
+				</div>
+				`)
+			}
+		}
+	})
+}
+
+$('#search-button').on('click', function () {
+	searchMovie()
+})
+
+$('#search-input').on('keyup', function (e) {
+	if (e.which === 13) {
+		searchMovie()
+	}
+})
+
+$('#movie-list').on('click', '.see-detail', function() {
+	$.ajax({
+		url : 'https://omdbapi.com',
+		dataType : 'json',
+		type : 'get',
+		data : {
+			'apikey' : '166b57cd',
+			'i' : $(this).data('id')
+		},
+		success : function (movie) {
+			if (movie.Response === "True") {
+				$('.modal-title').html(movie.Title)
+				$('.modal-body').html(`
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-md-4">
+                        <center>
+							<img src="`+ movie.Poster +`" class="img-fluid">
+                            </center>
+                            <br>
+						</div>
+						<div class="col-md-8">
+							<ul class="list-group">
+								<li class="list-group-item dark">
+									<p>` + movie.Plot + `</p>
+								</li>
+								<li class="list-group-item dark"><p class="content-category"><b>Released:</b></p> ` + movie.Released + `</li>
+								<li class="list-group-item dark"><p class="content-category"><b>Genre:</b></p> ` + movie.Genre + `</li>
+								<li class="list-group-item dark"><p class="content-category"><b>IMDB Rating:</b></p> ` + movie.Ratings[0].Value + `</li>
+								<li class="list-group-item dark"><p class="content-category"><b>Duration:</b></p> ` + movie.Runtime + `</li>
+								<li class="list-group-item dark"><p class="content-category"><b>Director:</b></p> ` + movie.Director + `</li>
+								<li class="list-group-item dark"><p class="content-category"><b>Actors:</b></p> ` + movie.Actors + `</li>
+								<li class="list-group-item dark"><p class="content-category"><b>Awards:</b></p> ` + movie.Awards + `</li>
+								<li class="list-group-item dark"><a class="btn btn-primary" href="https://www.imdb.com/title/` + movie.imdbID + `/" target="_blank">Visit IMDB</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				`)
+			}
+		}
+	})
+})
+
+$('#about').on('click', function () {
+	
+})
+		
+		
+	</script>
+  </body>
+</html>
