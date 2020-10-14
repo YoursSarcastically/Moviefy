@@ -35,13 +35,13 @@
     </div>
 </nav>
 
-		<div class="container-fluid dark">
+		<div class="container dark ">
 		
 			<div class="row mt-3 justify-content-center">
 				<div class="col-md-8">
-				
+				<br>
 		  <h1 class="text-center">Search movie</h1>
-		  <div class="input-group mb-3">
+		  <div class="input-group mb-3 input-group-lg">
 			<input type="text" class="form-control" placeholder="Tell me the name of your awesome movie...." id="search-input">
 			<div class="input-group-append">
 			  <button class="btn btn-outline-info btn-dark" type="button" id="search-button">Search</button>
@@ -178,7 +178,7 @@ $('#movie-list').on('click', '.see-detail', function() {
 						<div class="col-md-8">
 							<ul class="list-group">
 								<li class="list-group-item dark">
-									<p>` + movie.Plot + `</p>
+									<i><p>` + movie.Plot + `</p></i>
 								</li>
 								<li class="list-group-item dark"><p class="content-category"><b>Released:</b></p> ` + movie.Released + `</li>
 								<li class="list-group-item dark"><p class="content-category"><b>Genre:</b></p> ` + movie.Genre + `</li>
