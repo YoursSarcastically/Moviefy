@@ -39,6 +39,10 @@ font-family: 'Pacifico', cursive;
 }
 
 
+.size{
+    padding:5px;
+}
+
 
 .dark{
 	background-color: black;
