@@ -21,7 +21,7 @@
        
     </div>
     <div class="mx-auto order-0">
-        <a class="navbar-brand mx-auto  text text-center" href="#">Moviefy</a>
+        <a class="navbar-brand mx-auto text-info  text text-center" href="#">Moviefy</a>
         <br>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2">
             <span class="navbar-toggler-icon"></span>
@@ -181,14 +181,14 @@ $('#movie-list').on('click', '.see-detail', function() {
 								<li class="list-group-item dark">
 									<i><p>` + movie.Plot + `</p></i>
 								</li>
-								<li class="list-group-item dark"><p class="content-category"><b>Released:</b></p> ` + movie.Released + `</li>
-								<li class="list-group-item dark"><p class="content-category"><b>Genre:</b></p> ` + movie.Genre + `</li>
-								<li class="list-group-item dark"><p class="content-category"><b>IMDB Rating:</b></p> ` + movie.Ratings[0].Value + `</li>
-								<li class="list-group-item dark"><p class="content-category"><b>Duration:</b></p> ` + movie.Runtime + `</li>
-								<li class="list-group-item dark"><p class="content-category"><b>Director:</b></p> ` + movie.Director + `</li>
-								<li class="list-group-item dark"><p class="content-category"><b>Actors:</b></p> ` + movie.Actors + `</li>
-								<li class="list-group-item dark"><p class="content-category"><b>Awards:</b></p> ` + movie.Awards + `</li>
-								<li class="list-group-item dark"><a class="btn btn-primary" href="https://www.imdb.com/title/` + movie.imdbID + `/" target="_blank">Visit IMDB</a></li>
+								<li class="list-group-item dark"><p class="content-category text-info"><b>Released:</b></p> ` + movie.Released + `</li>
+								<li class="list-group-item dark"><p class="content-category text-info"><b>Genre:</b></p> ` + movie.Genre + `</li>
+								<li class="list-group-item dark"><p class="content-category text-info"><b>IMDB Rating:</b></p> ` + movie.Ratings[0].Value + `</li>
+								<li class="list-group-item dark"><p class="content-category text-info"><b>Duration:</b></p> ` + movie.Runtime + `</li>
+								<li class="list-group-item dark"><p class="content-category text-info"><b>Director:</b></p> ` + movie.Director + `</li>
+								<li class="list-group-item dark"><p class="content-category text-info"><b>Actors:</b></p> ` + movie.Actors + `</li>
+								<li class="list-group-item dark"><p class="content-category text-info"><b>Awards:</b></p> ` + movie.Awards + `</li>
+								<li class="list-group-item dark"><a class="btn btn-info" href="https://www.imdb.com/title/` + movie.imdbID + `/" target="_blank">Visit IMDB</a></li>
 							</ul>
 						</div>
 					</div>
